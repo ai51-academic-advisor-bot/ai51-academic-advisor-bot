@@ -1,6 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const connectToDatabase = require('./db')
+
+connectToDatabase();
 
 app.use(cors());
 
@@ -11,9 +14,11 @@ app.get('/', (req, res) => {
 
 // Include route files
 const testRoutes = require('./routes/testRoutes.js');
+const userRoutes = require('./routes/userRoutes.js');
 
 // Use routes
 app.use('/test', testRoutes);
+app.use('/api', userRoutes);
 
 // specifying the port and starting the server
 const port = process.env.PORT || 3001; // can use environment variables for port configuration
